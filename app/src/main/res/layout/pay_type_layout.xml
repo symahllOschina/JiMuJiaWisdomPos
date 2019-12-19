@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <View style="@style/divider_line1dp"></View>
+
+    <GridView
+        android:id="@+id/pay_type_mGridView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:horizontalSpacing="1dp"
+        android:numColumns="3"
+        android:stretchMode="columnWidth"
+        android:verticalSpacing="1dp"
+        android:stackFromBottom="true"
+        ></GridView>
+        <!--
+        android:stackFromBottom="true" 表示item以底部为准
+         -->
+</LinearLayout>

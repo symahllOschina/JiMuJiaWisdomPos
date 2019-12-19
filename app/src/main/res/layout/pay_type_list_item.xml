@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@drawable/button_num_style"
+    android:minHeight="90dp"
+    >
+    <ImageView
+        android:id="@+id/pay_type_item_imgView"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:src="@drawable/wx_pay_icon" />
+
+    <TextView
+        android:id="@+id/pay_type_item_textView"
+        style="@style/pay_type_list_text_styles"
+        android:text="刷卡"
+        ></TextView>
+</LinearLayout>

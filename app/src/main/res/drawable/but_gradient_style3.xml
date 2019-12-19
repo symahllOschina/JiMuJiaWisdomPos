@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 默认颜色 -->
+    <item android:state_pressed="true">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
+
+        <corners android:radius="20dip"/>
+            <gradient
+                android:angle="0"
+                android:endColor="@color/purple_c1aafd"
+                android:startColor="@color/purple_a174fb" />
+        </shape>
+    </item>
+
+    <!-- 按下颜色 -->
+    <item android:state_pressed="false">
+        <shape xmlns:android="http://schemas.android.com/apk/res/android"
+            android:shape="rectangle">
+            <corners android:radius="20dip"/>
+            <gradient
+                android:angle="0"
+                android:endColor="@color/purple_cbb7fe"
+                android:startColor="@color/purple_ac85fa" />
+         </shape>
+    </item>
+
+</selector>

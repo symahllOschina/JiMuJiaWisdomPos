@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <!--  dbname 创建的数据库名字 -->
+    <!--  version 数据库版本号 -->
+    <!--  list 下mapping 创建的表详细地址 -->
+    <dbname value="payresult"></dbname>
+    <version value="2"></version>
+    <list>
+        <mapping class="com.jimujia.pos.bean.PayResultNoticeReqData"></mapping>
+        <mapping class="com.jimujia.pos.bean.RefundResultNoticeReqData"></mapping>
+    </list>
+</litepal>

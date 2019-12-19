@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white_f5f5f5"
+    >
+    <include layout="@layout/menu_title_layout"/>
+    <View style="@style/divider_line1dp"/>
+    <com.jimujia.pos.view.XListView
+        android:id="@+id/order_list_mXListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white_f2f2f2"
+        android:divider="@color/white_f2f2f2"
+        android:dividerHeight="10dp"
+        ></com.jimujia.pos.view.XListView>
+
+</LinearLayout>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        >
+        
+
+        <EditText
+            android:id="@+id/input_amount_etSumMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="right|center_vertical"
+            android:hint="0.00"
+            android:maxLength="10"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text=""
+            android:textColor="@color/yellow_e79823"
+            android:textColorHint="@color/yellow_e79823"
+            android:textSize="@dimen/TextSize30"
+            android:layout_alignParentRight="true"
+            android:maxWidth="200dp"
+            android:minWidth="100dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="￥"
+            android:textColor="@color/yellow_e79823"
+            android:textColorHint="@color/yellow_e79823"
+            android:textSize="@dimen/TextSize40"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/input_amount_etSumMoney"
+            />
+
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <View
+            style="@style/divider_line1dp"
+            ></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            >
+            <View
+                style="@style/divider_line1dp_h"
+                />
+            <Button
+                android:id="@+id/input_amount_tvSeven"
+                android:text="7"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+            <Button
+                android:id="@+id/input_amount_tvEight"
+                android:text="8"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <Button
+                android:id="@+id/input_amount_tvNine"
+                android:text="9"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <ImageButton
+                android:id="@+id/input_amount_imagEliminate"
+                android:src="@drawable/del_icon"
+                style="@style/input_amount_button_styles"
+                />
+            <View
+                style="@style/divider_line1dp_h"
+                />
+        </LinearLayout>
+        <View
+            style="@style/divider_line1dp"
+            ></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            >
+            <View
+                style="@style/divider_line1dp_h"
+                />
+            <Button
+                android:id="@+id/input_amount_tvFour"
+                android:text="4"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <Button
+                android:id="@+id/input_amount_tvFive"
+                android:text="5"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <Button
+                android:id="@+id/input_amount_tvSix"
+                android:text="6"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <Button
+                android:id="@+id/input_amount_tvSpot"
+                android:text="."
+                style="@style/input_amount_button_styles"
+                />
+            <View
+                style="@style/divider_line1dp_h"
+                />
+        </LinearLayout>
+        <View
+            style="@style/divider_line1dp"
+            ></View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:orientation="horizontal"
+            >
+            <View
+                style="@style/divider_line1dp_h"
+                />
+            <Button
+                android:id="@+id/input_amount_tvOne"
+                android:text="1"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <Button
+                android:id="@+id/input_amount_tvTwo"
+                android:text="2"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <Button
+                android:id="@+id/input_amount_tvThree"
+                android:text="3"
+                style="@style/input_amount_button_styles"
+                />
+
+            <View
+                style="@style/divider_line1dp_h"
+                />
+
+            <Button
+                android:id="@+id/input_amount_tvZero"
+                android:text="0"
+                style="@style/input_amount_button_styles"
+                />
+            <View
+                style="@style/divider_line1dp_h"
+                />
+        </LinearLayout>
+        <View
+            style="@style/divider_line1dp"
+            ></View>
+    </LinearLayout>
+
+</LinearLayout>

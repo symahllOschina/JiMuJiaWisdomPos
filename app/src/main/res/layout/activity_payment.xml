@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <include layout="@layout/menu_title_layout"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        >
+        <View
+            android:layout_width="3dp"
+            android:layout_height="match_parent"
+            android:background="@color/orange_99CC33"/>
+        <TextView
+            android:id="@+id/payment_tvSumMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/debt_amount"
+            android:textSize="@dimen/TextSize18"
+            android:textColor="@color/grey_676767"
+            android:gravity="center_vertical"
+            android:layout_marginLeft="5dp"
+            />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <!-- 公共支付layout -->
+        <include
+            android:id="@+id/member_topup_centent_layout"
+            layout="@layout/input_amount_layout"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_below="@id/member_topup_centent_layout"
+            android:layout_alignParentBottom="true"
+            android:gravity="bottom"
+            >
+            <!-- 支付类型选择layout -->
+            <include
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/pay_bottom_layout"
+                layout="@layout/pay_type_layout"
+                android:visibility="visible"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
