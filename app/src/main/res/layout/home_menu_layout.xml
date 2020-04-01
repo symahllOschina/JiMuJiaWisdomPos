@@ -51,7 +51,7 @@
         <TextView
             android:layout_width="110dp"
             android:layout_height="35dp"
-            android:text="前往退款"
+            android:text="收款记录"
             android:textSize="@dimen/TextSize18"
             android:textColor="@color/white_ffffff"
             android:textStyle="bold"

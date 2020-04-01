@@ -88,7 +88,7 @@
     <color name="purple_cbb7fe">#cbb7fe</color>
     <color name="purple_c1aafd">#c1aafd</color>
     <color name="purple_ac85fa">#ac85fa</color>
-    <color name="purple_a174fb">#a174fb</color>
+    <color name="purple_a174fb">#a174fb</color>0
 
     <!-- 橙色 -->
     <color name="orange_99CC33">#99CC33</color>
@@ -99,6 +99,7 @@
     <!-- 绿色 -->
     <color name="green_AFFF94">#AFFF94</color>
     <color name="green_81FF57">#81FF57</color>
+    <color name="green_46be05">#46be05</color>
     <color name="green_30d60a">#30d60a</color>
     <color name="green_65db4e">#65db4e</color>
     <color name="green_09bb07">#09bb07</color>

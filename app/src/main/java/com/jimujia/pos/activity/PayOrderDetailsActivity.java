@@ -108,6 +108,7 @@ public class PayOrderDetailsActivity extends BaseActivity implements View.OnClic
      */
     private int onCreateIndex = 1;
 
+    private boolean isServer = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +123,9 @@ public class PayOrderDetailsActivity extends BaseActivity implements View.OnClic
         Intent intent = getIntent();
         posInitData = (PosInitData) intent.getSerializableExtra("posInitData");
         order = (PayOrderDetailData) intent.getSerializableExtra("order");
+        //本地配置服务地址参数
+        isServer = NitConfig.init(activity);
+        Log.e(TAG,"服务配置参数"+isServer);
 
 
 
@@ -313,21 +317,45 @@ public class PayOrderDetailsActivity extends BaseActivity implements View.OnClic
      * alreadyRefund 是否已经退款(0-未退款 1-已退款) 收款流水状态
      */
     private void updateButton(String payType,String isRefund,String alreadyRefund){
+        btRefund.setVisibility(View.VISIBLE);
         if(Utils.isNotEmpty(payType)){
             if("0".equals(payType)){
                 if(Utils.isNotEmpty(isRefund)){
                     if("0".equals(isRefund)){
+                        btRefund.setVisibility(View.GONE);
                         btRefund.setClickable(false);
                         btRefund.setText("未开启退款开关");
                         btRefund.setTextColor(ContextCompat.getColor(activity,R.color.grey_666666));
                         btRefund.setBackgroundColor(ContextCompat.getColor(activity,R.color.gray_e5e5e5));
                     }else if("1".equals(isRefund)){
 
-                        tvRefundHintMsg.setVisibility(View.VISIBLE);
-                        btRefund.setClickable(true);
-                        btRefund.setText("退款");
-                        btRefund.setTextColor(ContextCompat.getColor(activity,R.color.white_ffffff));
-                        btRefund.setBackgroundColor(ContextCompat.getColor(activity,R.color.blue_2496F9));
+                        if(Utils.isNotEmpty(alreadyRefund)){
+                            if("0".equals(alreadyRefund)){
+
+                                tvRefundHintMsg.setVisibility(View.VISIBLE);
+                                btRefund.setClickable(true);
+                                btRefund.setText("退款");
+                                btRefund.setTextColor(ContextCompat.getColor(activity,R.color.white_ffffff));
+                                btRefund.setBackgroundColor(ContextCompat.getColor(activity,R.color.blue_2496F9));
+
+                            }else if("1".equals(alreadyRefund)){
+                                btRefund.setClickable(false);
+                                btRefund.setText("已退款");
+                                btRefund.setTextColor(ContextCompat.getColor(activity,R.color.grey_666666));
+                                btRefund.setBackgroundColor(ContextCompat.getColor(activity,R.color.gray_e5e5e5));
+                            }else{
+                                btRefund.setClickable(false);
+                                btRefund.setText("退款");
+                                btRefund.setTextColor(ContextCompat.getColor(activity,R.color.white_ffffff));
+                                btRefund.setBackgroundColor(ContextCompat.getColor(activity,R.color.gray_e5e5e5));
+                            }
+
+                        }else{
+                            btRefund.setClickable(false);
+                            btRefund.setText("退款");
+                            btRefund.setTextColor(ContextCompat.getColor(activity,R.color.white_ffffff));
+                            btRefund.setBackgroundColor(ContextCompat.getColor(activity,R.color.gray_e5e5e5));
+                        }
 
                     }else{
                         btRefund.setClickable(false);
@@ -385,8 +413,12 @@ public class PayOrderDetailsActivity extends BaseActivity implements View.OnClic
     private void updateOrderStatus(final RefundResultNoticeReqData reqData){
 
         showWaitDialog();
-
-        final String url = NitConfig.refundNoticeUrl;
+        final String url;
+        if(isServer){
+            url = NitConfig.refundNoticeUrl;
+        }else{
+            url = NitConfig.refundNoticeTestUrl;
+        }
         Log.e(TAG,"退款结果通知接口路径："+url);
 
         new Thread(){

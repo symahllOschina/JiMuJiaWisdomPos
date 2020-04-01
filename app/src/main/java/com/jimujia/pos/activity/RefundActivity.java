@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -82,7 +83,7 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
     @ViewInject(R.id.refund_etRefundQrcode)
     ClearEditText etRefundQrcode;
     @ViewInject(R.id.refund_etRefundAmount)
-    ClearEditText etRefundAmount;
+    EditText etRefundAmount;
 
     @ViewInject(R.id.refund_btRefund)
     Button btRefund;
@@ -121,6 +122,7 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
      * 是否为通知更新订单动作
      */
     private boolean isNotice = false;
+    private boolean isServer = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -136,15 +138,18 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
         posInitData = (PosInitData) intent.getSerializableExtra("posInitData");
         order = (PayOrderDetailData) intent.getSerializableExtra("order");
         payType = intent.getStringExtra("payType");
+        //本地配置服务地址参数
+        isServer = NitConfig.init(activity);
+        Log.e(TAG,"服务配置参数"+isServer);
 //        payType = Constants.PAYTYPE_BANK;
-        if(Utils.isNotEmpty(payType)){
-            if(Constants.PAYTYPE_BANK.equals(payType)){
-                layoutQrcode.setVisibility(View.GONE);
-                iewFGX1.setVisibility(View.GONE);
-            }else{
-
-            }
-        }
+//        if(Utils.isNotEmpty(payType)){
+//            if(Constants.PAYTYPE_BANK.equals(payType)){
+//                layoutQrcode.setVisibility(View.GONE);
+//                iewFGX1.setVisibility(View.GONE);
+//            }
+//        }
+        layoutQrcode.setVisibility(View.GONE);
+        iewFGX1.setVisibility(View.GONE);
         etRefundAmount.setText(DecimalUtil.branchToElement(DecimalUtil.StringToPrice(String.valueOf(order.getTrade_amount()))));
         etRefundAmount.setEnabled(false);
         initListener();
@@ -195,8 +200,12 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
 
         showWaitDialog();
         isNotice = true;
-
-        final String url = NitConfig.refundNoticeUrl;
+        final String url;
+        if(isServer){
+            url = NitConfig.refundNoticeUrl;
+        }else{
+            url = NitConfig.refundNoticeTestUrl;
+        }
         Log.e(TAG,"退款结果通知接口路径："+url);
 
         new Thread(){
@@ -231,8 +240,12 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
     private void getRefundNo(){
 
         showWaitDialog();
-
-        final String url = NitConfig.getRefundNoUrl;
+        final String url;
+        if(isServer){
+            url = NitConfig.getRefundNoUrl;
+        }else{
+            url = NitConfig.getRefundNoTestUrl;
+        }
         Log.e(TAG,"获取退款流水号接口路径："+url);
         final RefundNoReqData refundNoReqData = ParamsReqUtil.getRefundNoReqData(posInitData,order);
         new Thread(){
@@ -533,7 +546,7 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
             FuyouPosServiceUtil.cardRefundReq(activity, paySerialNum,total_feeStr);
         }else{
             //扫码退款
-            FuyouPosServiceUtil.scanRefundReq(activity, "",etRefundQrcodeStr,total_feeStr,paySerialNum);
+            FuyouPosServiceUtil.scanRefundReq(activity, order.getRefer_no(),etRefundQrcodeStr,total_feeStr,paySerialNum);
         }
 
 
@@ -744,15 +757,15 @@ public class RefundActivity extends BaseActivity implements View.OnClickListener
                 if(Utils.isFastClick()){
                     return;
                 }
-                if(Utils.isNotEmpty(payType)){
-                    if(!Constants.PAYTYPE_BANK.equals(payType)){
-                        etRefundQrcodeStr = etRefundQrcode.getText().toString().trim();
-                        if(Utils.isEmpty(etRefundQrcodeStr)){
-                            ToastUtil.showText(activity,"退款条码不能为空！",1);
-                            return;
-                        }
-                    }
-                }
+//                if(Utils.isNotEmpty(payType)){
+//                    if(!Constants.PAYTYPE_BANK.equals(payType)){
+//                        etRefundQrcodeStr = etRefundQrcode.getText().toString().trim();
+//                        if(Utils.isEmpty(etRefundQrcodeStr)){
+//                            ToastUtil.showText(activity,"退款条码不能为空！",1);
+//                            return;
+//                        }
+//                    }
+//                }
 
                etRefundAmountStr = etRefundAmount.getText().toString().trim();
 

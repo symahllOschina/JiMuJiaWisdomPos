@@ -63,7 +63,7 @@ public class SignInActivity extends BaseActivity {
      */
     private PosInitData posInitData;
 
-
+    private boolean isServer = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -72,6 +72,9 @@ public class SignInActivity extends BaseActivity {
 
         Intent intent = getIntent();
         isPrint = intent.getBooleanExtra("isPrint",isPrint);
+        //本地配置服务地址参数
+        isServer = NitConfig.init(activity);
+        Log.e(TAG,"服务配置参数"+isServer);
         SharedPreferencesUtil posInitSP = new SharedPreferencesUtil(activity, "posInit");
         SharedPreferencesUtil storeInfoSP = new SharedPreferencesUtil(activity, "storeInfo");
         if(isPrint){
@@ -134,9 +137,15 @@ public class SignInActivity extends BaseActivity {
     private void getStoreInfo(){
 
         showWaitDialog();
+        final String url;
+        if(isServer){
+             url = NitConfig.getStoreInfoUrl;
+        }else{
+            url = NitConfig.getStoreInfoTestUrl;
+        }
 
-        final String url = NitConfig.getStoreInfoUrl;
         Log.e(TAG,"获取门店信息接口路径："+url);
+
         final StoreInfoReqData reqData = ParamsReqUtil.getStoreInfoReqData(posInitData);
         new Thread(){
             @Override

@@ -56,6 +56,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
+
+
     /** 初始化控件 */
     private void initView(){
         homeLayout = findViewById(R.id.main_tab_homeLayout);

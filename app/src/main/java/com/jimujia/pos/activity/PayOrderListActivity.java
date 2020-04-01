@@ -114,6 +114,7 @@ public class PayOrderListActivity extends BaseActivity implements View.OnClickLi
     String startDate,endDate,orderId = "",customerName = "",customerPhone = "";
 
 
+    private boolean isServer = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -131,6 +132,9 @@ public class PayOrderListActivity extends BaseActivity implements View.OnClickLi
         Intent intent = getIntent();
         posInitData = (PosInitData) intent.getSerializableExtra("posInitData");
         tradeType = (String) intent.getSerializableExtra("tradeType");
+        //本地配置服务地址参数
+        isServer = NitConfig.init(activity);
+        Log.e(TAG,"服务配置参数"+isServer);
         if("1".equals(tradeType)){
             tvTitle.setText("退款流水");
         }
@@ -153,7 +157,7 @@ public class PayOrderListActivity extends BaseActivity implements View.OnClickLi
         Log.e(TAG,"起始日期："+startDate);
         Log.e(TAG,"结束日期："+endDate);
         refreshCount = 1;
-        loadMore = "1";
+        loadMore = "0";
         pageNum = 1;
         getOrderList(pageNum,pageNumCount);
     }
@@ -185,7 +189,12 @@ public class PayOrderListActivity extends BaseActivity implements View.OnClickLi
 
             showWaitDialog();
         }
-        final String url = NitConfig.getPaymentsUrl;
+        final String url;
+        if(isServer){
+            url = NitConfig.getPaymentsUrl;
+        }else{
+            url = NitConfig.getPaymentsTestUrl;
+        }
         Log.e(TAG,"获取支付订单接口路径："+url);
         final PayOrderListReqData reqData = ParamsReqUtil.getPayOrderListReqData(posInitData,pageNum,pageCount,tradeType,orderId,customerName,customerPhone);
         new Thread(){

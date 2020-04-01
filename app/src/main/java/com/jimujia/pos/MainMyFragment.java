@@ -112,7 +112,7 @@ public class MainMyFragment extends BaseFragment implements View.OnClickListener
     /**
      * 连续点击多次后的事件实现
      */
-    int CLICK_NUM = 10;
+    int CLICK_NUM = 20;
     //点击时间间隔5秒
     int CLICK_INTERVER_TIME = 5000;
     //上一次的点击时间

@@ -366,7 +366,7 @@ public class FuyouPosServiceUtil {
             Bundle bundle = new Bundle();
             bundle.putString("data", printTextStr);
             bundle.putString("isPrintTicket", "true");
-            Log.e("调打印Bundle的值：",bundle.toString());
+//            Log.e("调打印Bundle的值：",bundle.toString());
             intent.putExtras(bundle);
             activity.startActivityForResult(intent, PRINT_REQUEST_CODE);
         } catch(ActivityNotFoundException e) {

@@ -106,7 +106,7 @@ public class OrderListActivity extends BaseActivity implements View.OnClickListe
     private static final int WINDOW_BG_ALPHA = 0x1001;
 
     String startDate,endDate,orderId = "",customerName = "",customerPhone = "";
-
+    private boolean isServer = true;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,7 +121,9 @@ public class OrderListActivity extends BaseActivity implements View.OnClickListe
 
         Intent intent = getIntent();
         posInitData = (PosInitData) intent.getSerializableExtra("posInitData");
-
+        //本地配置服务地址参数
+        isServer = NitConfig.init(activity);
+        Log.e(TAG,"服务配置参数"+isServer);
 
         initView();
 
@@ -142,7 +144,7 @@ public class OrderListActivity extends BaseActivity implements View.OnClickListe
         Log.e(TAG,"起始日期："+startDate);
         Log.e(TAG,"结束日期："+endDate);
         refreshCount = 1;
-        loadMore = "1";
+        loadMore = "0";
         pageNum = 1;
         getOrderList(pageNum,pageNumCount);
     }
@@ -174,7 +176,13 @@ public class OrderListActivity extends BaseActivity implements View.OnClickListe
 
             showWaitDialog();
         }
-        final String url = NitConfig.getBranchOrdersUrl;
+        final String url;
+        if(isServer){
+            url = NitConfig.getBranchOrdersUrl;
+        }else{
+            url = NitConfig.getBranchOrdersTestUrl;
+        }
+
         Log.e(TAG,"获取门店订单接口路径："+url);
         final OrderListReqData reqData = ParamsReqUtil.getOrderListReqData(posInitData,pageNum,pageCount,startDate,endDate,orderId,customerName,customerPhone);
         new Thread(){

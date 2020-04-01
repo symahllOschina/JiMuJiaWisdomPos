@@ -114,6 +114,7 @@ public class PaymentActivity extends BaseInputAmountActivity implements View.OnC
      * 是否为通知更新订单动作
      */
     private boolean isNotice = false;
+    private boolean isServer = true;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,6 +131,9 @@ public class PaymentActivity extends BaseInputAmountActivity implements View.OnC
         Intent intent = getIntent();
         posInitData = (PosInitData) intent.getSerializableExtra("posInitData");
         order = (OrderDetailData) intent.getSerializableExtra("order");
+        //本地配置服务地址参数
+        isServer = NitConfig.init(activity);
+        Log.e(TAG,"服务配置参数"+isServer);
         //待支付金额
         Integer debtAmountStr = order.getDebt_amount();
         if(Utils.isNotEmpty(String.valueOf(debtAmountStr))){
@@ -265,8 +269,12 @@ public class PaymentActivity extends BaseInputAmountActivity implements View.OnC
 
         showWaitDialog();
         isNotice = true;
-
-        final String url = NitConfig.paymentNoticeUrl;
+        final String url;
+        if(isServer){
+            url = NitConfig.paymentNoticeUrl;
+        }else{
+            url = NitConfig.paymentNoticeTestUrl;
+        }
         Log.e(TAG,"支付结果通知接口路径："+url);
 
         new Thread(){
@@ -301,8 +309,12 @@ public class PaymentActivity extends BaseInputAmountActivity implements View.OnC
     private void getPaymentNo(final PaymentNoReqData paymentNoReqData){
 
         showWaitDialog();
-
-        final String url = NitConfig.getPaymentNoUrl;
+        final String url;
+        if(isServer){
+            url = NitConfig.getPaymentNoUrl;
+        }else{
+            url = NitConfig.getPaymentNoTestUrl;
+        }
         Log.e(TAG,"获取支付流水号接口路径："+url);
 
         new Thread(){
